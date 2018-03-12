@@ -4,7 +4,7 @@
 
 ## Import statements
 # Import statements
-import os
+import time, os
 from flask import Flask, render_template, session, redirect, url_for, flash, request
 from flask_script import Manager, Shell
 from flask_wtf import FlaskForm
@@ -13,8 +13,7 @@ from wtforms.validators import Required, Length # Here, too
 from flask_sqlalchemy import SQLAlchemy
 import jinja2
 import requests, json, operator
-#from flask_sqlalchemy import Table, Column, Integer, ForeignKey, String, DateTime, Date, Time
-#from flask_sqlalchemy import relationship, backref
+
 
 
 ## App setup code
@@ -68,6 +67,21 @@ def get_betrayal_leader():
     leader = max(dictionary.items(), key=operator.itemgetter(1))
     return leader
 
+def valid_name(form, field):
+        allowed = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        message = "Name cannot have restricted characters (letters only)."
+        for ch in field.data:
+            if ch not in allowed:
+                raise ValidationError(message)
+
+def game_search(game):
+    params = {}
+    params["q"] = game
+    params["user-key"] = "925f41ecd3fce1b52e64ef07b9fb2d82"
+    resp = requests.get('https://www.igdb.com/search?', params = params)
+    data = json.dumps(resp.text)
+    return data
+
 
 ##################
 ##### MODELS #####
@@ -77,6 +91,7 @@ class Name(db.Model):
     __tablename__ = "names"
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
+    leaderboard = db.relationship('LeaderBoard',backref='Name')
 
     def __repr__(self):
         return "{} (ID: {})".format(self.name, self.id)
@@ -100,12 +115,19 @@ class LeaderBoard(db.Model):
 ###################
 
 class NameForm(FlaskForm):
-    name = StringField("Please enter your name.",validators=[Required()])
+    name = StringField("Please enter a friend's name. Must only contain letters.", validators=[Required(),valid_name])
     submit = SubmitField('Submit')
+
 
 class MovieRelForm(FlaskForm):
     movie = StringField("Enter your favorite movie.",validators=[Required()])
     submit = SubmitField('Submit')
+
+
+class GameForm(FlaskForm):
+    game = StringField("Enter your favorite video game.",validators=[Required()])
+    submit = SubmitField('Submit')
+
 
 
 
@@ -120,7 +142,9 @@ def home():
     if form.validate_on_submit():
         get_or_create_name(db.session,form.name.data)
         return redirect(url_for('all_names'))
-    return render_template('base.html',form=form)
+    else:
+        flash(form.errors)
+        return render_template('base.html',form=form)
 
 @app.route('/names', methods=['GET', 'POST'])
 def all_names():
@@ -132,15 +156,6 @@ def all_names():
     return render_template('name_example.html',names=all_names)
 
 @app.route('/leaderboards', methods=['GET', 'POST'])
-#def leaderboard():
-#   all_data = []
-#    i = 0
-#    names = Name.query.all()
-#    for n in names:
-#        i = i + 1
-#        if n in names:
-#            i = i + 1
-#        all_data.append(tuple((n,i)))
 def leaderboard():
     new = get_iterations()
     leader = get_betrayal_leader()
@@ -150,7 +165,8 @@ def leaderboard():
 def movie_suggestion():
     form = MovieRelForm()
     if form.validate_on_submit():
-        get_or_create_movie(db.session, form.movie.data)
+        if not db.session.query(Movie).filter_by(title=form.movie.data).first():
+            get_or_create_movie(db.session, form.movie.data)
         return redirect(url_for('all_movies'))
     return render_template('movie_sugg.html', form=form)
 def all_movies():
@@ -159,11 +175,15 @@ def all_movies():
     for m in movies:
         all_movies.append(m)
     return render_template('', items=all_movies)
-def lookup(movie_title):
-    params = {}
-    params["s"] = movie_title
-    params["type"] = movie
-    resp = requests.get('')
+
+@app.route('/games', methods = ['GET', 'POST'])
+def game_lookup():
+    form = GameForm()
+    if form.validate_on_submit():
+        data = game_search(form.game.data)
+        return render_template("game_result.html", objects=data)
+    else:
+        return render_template('game_sugg.html',form=form)
 
 
 

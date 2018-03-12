@@ -1,34 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>BoB - Home</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!--STYLING-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}"/>
-	<!--ANY JS HERE-->
-	<script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
-	<!--FAVICON-->
-	<link rel="shortcut icon" href="../BOB.ico" type='image/x-icon'/>
-</head>
-<header>
-		<div class="logo">
-			<!--Book of Betrayals Logo-->
-		</div>
-		<nav id="top-navi" class="top-navi">
-			<div class="menu">
-				<a id="toggle" href="javascript:void(0);" onclick="Menu()">&#9776; Menu</a>
-			</div>
-			<ul>
-				<li><a class="home" href="/">HOME</a></li>
-				<li><a href="/movies">Movie Suggestions</a></li>
-				<li><a href="/leaderboards">Leaderboards</a></li>
-				<li><a href="/names">NAME EXAMPLE</a></li>
-			</ul>
-		</nav>
-</header>
+{% if not standalone %}{% extends "base.html" %}{% endif -%}
+{% block title %}BoB - Leaderboards{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+
+{% block content1 %}
 <body>
-	<h1>BOOK OF BETRAYAL LEADERBOARDS</h1>
+	<h1>BOOK OF BUDS LEADERBOARDS</h1>
 	<table class="table-leader">
 	{% for item in items.items() %}
 		<TR>
@@ -37,6 +15,8 @@
 		</TR>
 	{% endfor %}
 	</table>
-	<h2>The Most Betrayals</h2>
-		<p>The Leader: {{ leader }}</p>
+	<h2>The Most Buds</h2>
+		<p>The Leader: {{ leader[0] }} with {{ leader[1] }} mentions</p>
+		<p>Click <a href="/">here</a> to insert a new name into the Book</p>
 </body>
+{% endblock %}

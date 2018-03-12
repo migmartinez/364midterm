@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>BoB - Home</title>
+	{% block head %}
+	<title>{% block title %} BoB - Home {% endblock %}</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!--STYLING-->
@@ -10,13 +11,15 @@
 	<script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
 	<!--FAVICON-->
 	<link rel="shortcut icon" href="../BOB.ico" type='image/x-icon'/>
+	{% endblock %}
 </head>
 <body>
 	<header>
 		<div class="logo">
-			<!--Book of Betrayals Logo-->
+			<!--Book of Buds Logo-->
 		</div>
 		<nav id="top-navi" class="top-navi">
+			{% block nav %}
 			<div class="menu">
 				<a id="toggle" href="javascript:void(0);" onclick="Menu()">&#9776; Menu</a>
 			</div>
@@ -25,14 +28,17 @@
 				<li><a href="/movies">Movie Suggestions</a></li>
 				<li><a href="/leaderboards">Leaderboards</a></li>
 				<li><a href="/names">NAME EXAMPLE</a></li>
+				<li><a href="/games">Game Suggestions</a></li>
 			</ul>
+			{% endblock %}
 		</nav>
 	</header>
+	<p>This app is designated for friend groups who are looking for something new to do!</p>
 </body>
 
 {% block content1 %}
 
-<form action="{{ url_for('home') }}" method="POST">
+<form action="{{ url_for('home') }}" method="POST" name="form">
     {{ form.name.label() }}{{ form.name() }}<br>
     {{ form.submit() }}
     {{ form.hidden_tag() }}

@@ -1,48 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>BoB - Home</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!--STYLING-->
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}"/>
-	<!--ANY JS HERE-->
-	<script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
-	<!--FAVICON-->
-	<link rel="shortcut icon" href="../BOB.ico" type='image/x-icon'/>
-</head>
-<body>
-	<header>
-		<div class="logo">
-			<!--Book of Betrayals Logo-->
-		</div>
-		<nav id="top-navi" class="top-navi">
-			<div class="menu">
-				<a id="toggle" href="javascript:void(0);" onclick="Menu()">&#9776; Menu</a>
-			</div>
-			<ul>
-				<li><a class="home" href="/">HOME</a></li>
-				<li><a href="/movies">Movie Suggestions</a></li>
-				<li><a href="/leaderboards">Leaderboards</a></li>
-				<li><a href="/names">NAME EXAMPLE</a></li>
-			</ul>
-		</nav>
-	</header>
-</body>
-
-{% block content2 %}
-
-<form action="" method="POST">
+{% if not standalone %}{% extends "base.html" %}{% endif -%}
+{% block title %}BoB - Movie Suggestions{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block content1 %}
+<script type="text/javascript">
+	function showInput() {
+		var movieInput = document.getElementById('user_input')
+		document.getElementById('display_mov').innerHTML = movieInput.movie.value
+		return true;
+	}
+</script>
+<form action="javascript:void(0);" onsubmit="showInput();" method="POST" id="user_input">
     {{ form.movie.label() }}{{ form.movie() }}<br>
-    {{ form.submit() }}
+    {{ form.submit() }} 
 </form>
+
+<label>Your favorite movie: </label>
+<p id ='display_mov'></p>
 
 {% endblock %}
 
-{% for item in items %}
-<table>
-	<TR>
-		<TD class="c1">{{item}}</TD>
-	</TR>
-</table>
-{% endfor %}

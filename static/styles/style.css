@@ -3,65 +3,35 @@ html {
 }
 
 .table-leader tr {
-	background-color: white;
+	background-color: blue;
 	color: white;
 }
 body {
-	background-color: green;
+	background-color: yellow;
 }
 header{
-	font-family: 'Quicksand', sans-serif;
 	font-size: 105%;
     box-shadow: 0px 18px 26px 1px rgba(141, 141, 139, .75);
     width: 100%;}
 
-/*mobile-first*/
 .top-navi ul{
 	list-style-type: none;
 	padding: 0;
-	background-color: #211D24; /*CHANGE*/
+	background-color: #211D24;
 	margin: 0;
 	display: none;
 }
-.top-navi ul li, .menu-icon{
-	border-top: 1px solid #DDDDDA; /*CHANGE*/
+.top-navi ul li {
+	border-color: white;
 }
 .top-navi ul li a{
 	font-size: 1em;
-	color: #DDDDDA; /*CHANGE*/
+	color: #DDDDDA; 
 	text-decoration: none;
 	padding: .5em 1em;
 	display: block;
 	text-align: center;
-}
-.menu-icon a{
-	font-size: 1em;
-	color: #DDDDDA; /*CHANGE*/
-	text-decoration: none;
-	padding: .5em 1em;
-	display: block;
-	text-align: center;
-}
-.top-navi ul li a.current-page{
-	color: #F54320;
-	font-weight: bold;
-}
-.top-navi ul li a.current-page:before {
-  color: #F54320;
-  padding-right: 4px;
-  position: relative;
-  top: 1px;
-}
-.top-navi ul li a:hover, .menu-icon a:hover, .top-nav ul li a:focus, .menu-icon a:focus{
-    background-color: #E3AD02;
-    color: #DDDDDA;
-    font-weight: bold;
-}
-.top-navi ul li a:hover:before, .top-nav ul li a:focus:before{
-	color: #DDDDDA;
-  	padding-right: 4px;
-  	position: relative;
-  	top: 1px;
+	border-color: white;
 }
 
 .top-navi.toggle-open ul {

@@ -1,16 +1,14 @@
 {% if not standalone %}{% extends "base.html" %}{% endif -%}
-{% block title %}BoB - Name Example{% endblock %}
+{% block title %}BoB - Game Result{% endblock %}
 {% block head %}
 	{{ super() }}
 {% endblock %}
 
 {% block content1 %}
-
-<h1>Names Visited</h1>
-
-{% for n in names %}
-    <p>{{ n }}</p>
+{% for r in objects %}
+{{ r }}
 {% endfor %}
-
-
 {% endblock %}
+
+
+<h1> Test</h1>

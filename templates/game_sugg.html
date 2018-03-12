@@ -1,0 +1,13 @@
+{% if not standalone %}{% extends "base.html" %}{% endif -%}
+{% block title %}BoB - Game Suggestions{% endblock %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+
+{% block content1 %}
+<form action="{{ url_for('game_lookup') }}" method="GET" name="form">
+    {{ form.game.label() }}{{ form.game() }}<br>
+    {{ form.submit() }}
+</form>
+
+{% endblock %}
