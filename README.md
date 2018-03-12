@@ -14,9 +14,9 @@ X At least one additional template with a Jinja template for loop and at least o
 
 X At least one errorhandler for a 404 error and a corresponding template.
 
-- At least one request to a REST API that is based on data submitted in a WTForm.
+X At least one request to a REST API that is based on data submitted in a WTForm.
 
-- At least one additional (not provided) WTForm that sends data with a GET request to a new page.
+X At least one additional (not provided) WTForm that sends data with a GET request to a new page.
 
 X At least one additional (not provided) WTForm that sends data with a POST request to the same page.
 
@@ -26,9 +26,9 @@ X At least 2 additional model classes.
 
 X Have a one:many relationship that works properly built between 2 of your models.
 
-- Successfully save data to each table.
+X Successfully save data to each table.
 
-- Successfully query data from each of your models (so query at least one column, or all data, from every database table you have a model for).
+X Successfully query data from each of your models (so query at least one column, or all data, from every database table you have a model for).
 
 X Query data using an .all() method in at least one view function and send the results of that query to a template.
 

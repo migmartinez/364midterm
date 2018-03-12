@@ -180,11 +180,14 @@ def all_movies():
 def game_lookup():
     form = GameForm()
     if form.validate_on_submit():
-        data = game_search(form.game.data)
-        return render_template("game_result.html", objects=data)
-    else:
-        return render_template('game_sugg.html',form=form)
+        return redirect(url_for('game_game'))
+    return render_template("game_sugg.html", form=form)
 
+@app.route('/gameresult', methods = ['GET', 'POST'])
+def game_game():
+    form = GameForm()
+    data = game_search(form.game.data)
+    return render_template("game_result.html", objects=data)
 
 
 
