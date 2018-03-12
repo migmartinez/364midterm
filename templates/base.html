@@ -1,4 +1,34 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BoB - Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!--STYLING-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}"/>
+	<!--ANY JS HERE-->
+	<script type="text/javascript" src="{{ url_for('static',filename='js/script.js') }}"></script>
+	<!--FAVICON-->
+	<link rel="shortcut icon" href="../BOB.ico" type='image/x-icon'/>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<!--Book of Betrayals Logo-->
+		</div>
+		<nav id="top-navi" class="top-navi">
+			<div class="menu">
+				<a id="toggle" href="javascript:void(0);" onclick="Menu()">&#9776; Menu</a>
+			</div>
+			<ul>
+				<li><a class="home" href="/">HOME</a></li>
+				<li><a href="/movies">Movie Suggestions</a></li>
+				<li><a href="/leaderboards">Leaderboards</a></li>
+				<li><a href="/names">NAME EXAMPLE</a></li>
+			</ul>
+		</nav>
+	</header>
+</body>
 
 {% block content1 %}
 
@@ -7,6 +37,5 @@
     {{ form.submit() }}
     {{ form.hidden_tag() }}
 </form>
-
 
 {% endblock %}

@@ -11,7 +11,8 @@
 	<!--FAVICON-->
 	<link rel="shortcut icon" href="../BOB.ico" type='image/x-icon'/>
 </head>
-<header>
+<body>
+	<header>
 		<div class="logo">
 			<!--Book of Betrayals Logo-->
 		</div>
@@ -26,15 +27,22 @@
 				<li><a href="/names">NAME EXAMPLE</a></li>
 			</ul>
 		</nav>
-</header>
+	</header>
+</body>
 
-{% block content1 %}
+{% block content2 %}
 
-<h1>Names Visited</h1>
-
-{% for n in names %}
-    <p>{{ n }}</p>
-{% endfor %}
-
+<form action="" method="POST">
+    {{ form.movie.label() }}{{ form.movie() }}<br>
+    {{ form.submit() }}
+</form>
 
 {% endblock %}
+
+{% for item in items %}
+<table>
+	<TR>
+		<TD class="c1">{{item}}</TD>
+	</TR>
+</table>
+{% endfor %}

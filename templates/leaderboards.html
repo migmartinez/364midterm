@@ -27,14 +27,16 @@
 			</ul>
 		</nav>
 </header>
-
-{% block content1 %}
-
-<h1>Names Visited</h1>
-
-{% for n in names %}
-    <p>{{ n }}</p>
-{% endfor %}
-
-
-{% endblock %}
+<body>
+	<h1>BOOK OF BETRAYAL LEADERBOARDS</h1>
+	<table class="table-leader">
+	{% for item in items.items() %}
+		<TR>
+			<TD class="c1">{{item[0]}}</TD>
+			<TD class="c2">{{item[1]}}</TD>
+		</TR>
+	{% endfor %}
+	</table>
+	<h2>The Most Betrayals</h2>
+		<p>The Leader: {{ leader }}</p>
+</body>
